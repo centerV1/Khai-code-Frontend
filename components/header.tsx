@@ -5,14 +5,14 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React, { useContext } from "react";
 import { cn } from "@/lib/utils";
-import { AuthContext } from "@/app/common/auth/auth-context";
+import { AuthContext } from "@/app/common/service/auth/auth-context";
 import { useRouter } from "next/navigation";
 
 const menuItems = [
   { name: "Home", href: "/" },
-  { name: "Product", href: "#link" },
+  { name: "Product", href: "/product" },
 
-  { name: "About", href: "#link" },
+  { name: "About", href: "/about" },
   { name: "Help", href: "#link" },
 ];
 
@@ -103,7 +103,7 @@ export const HeroHeader = ({ logout }: HeroHeaderProps) => {
                       asChild
                       variant="outline"
                       size="sm"
-                      className={cn(isScrolled && "lg:hidden")}
+                      className={cn(!isScrolled ? "flex" : "lg:inline-flex")}
                     >
                       <Link href="/login">
                         <span>Login</span>
@@ -112,7 +112,7 @@ export const HeroHeader = ({ logout }: HeroHeaderProps) => {
                     <Button
                       asChild
                       size="sm"
-                      className={cn(isScrolled && "lg:hidden")}
+                      className={cn(!isScrolled ? "flex" : "lg:inline-flex")}
                     >
                       <Link href="/signup">
                         <span>Sign Up</span>
@@ -120,11 +120,12 @@ export const HeroHeader = ({ logout }: HeroHeaderProps) => {
                     </Button>
                   </>
                 )}
+
                 {isAuthenticated && (
                   <Button
                     variant="outline"
                     size="sm"
-                    className={cn(isScrolled && "lg:hidden")}
+                    className={cn(!isScrolled ? "flex" : "lg:inline-flex")}
                     onClick={async () => {
                       await logout();
                       router.push("/");
@@ -134,7 +135,7 @@ export const HeroHeader = ({ logout }: HeroHeaderProps) => {
                   </Button>
                 )}
 
-                <Button
+                {/* <Button
                   asChild
                   size="sm"
                   className={cn(isScrolled ? "lg:inline-flex" : "hidden")}
@@ -142,7 +143,7 @@ export const HeroHeader = ({ logout }: HeroHeaderProps) => {
                   <Link href="#">
                     <span>Get Started</span>
                   </Link>
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>

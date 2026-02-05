@@ -32,8 +32,7 @@ const setAuthCookie = async (response: Response) => {
     (await cookies()).set({
       name: AUTHENTICATION_COOKIE,
       value: token,
-      secure: true,
-      // secure: false,
+      secure: process.env.APP_ENV === "production",
       httpOnly: true,
       expires: new Date(jwtDecode(token).exp! * 1000),
     });
