@@ -38,14 +38,14 @@ export default function ProductsGrid({ products }: ProductGridProps) {
   //   }, []);
 
   return (
-    <div className="h-[85vh] overflow-y-auto pr-4 pt-10 custom-scrollbar">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pt-10">
         {products?.map((product) => (
           <div key={product.id} className="h-full">
             <Product product={product} />
           </div>
         ))}
       </div>
-    </div>
+
   );
 }

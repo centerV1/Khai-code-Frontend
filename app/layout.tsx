@@ -41,7 +41,7 @@ export default async function RootLayout({
             {children}
             </main>
             <Toaster />
-            {/* <FooterSection/> */}
+            <FooterSection/>
           </Providers>
         </div>
       </body>
