@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useActionState, useState } from "react";
-import Signup from "../common/auth/signup";
+import Signup from "../common/service/auth/signup";
 import { useServerMessage } from "../common/util/error";
 import type { FormState } from "@/app/common/util/error";
 

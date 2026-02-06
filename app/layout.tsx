@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { HeroHeader } from "@/components/header";
-import authenticated from "@/app/common/auth/authenticated";
+import authenticated from "@/app/common/service/auth/authenticated";
 import Providers from "./providers";
-import logout from "./common/auth/logout";
+import logout from "../app/common/service/auth/logout";
 import { Toaster } from "@/components/ui/sonner";
+import FooterSection from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,11 +34,16 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers authenticated={isAuthenticated}>
-          <HeroHeader logout={logout} />
-          {children}
-          <Toaster/>
-        </Providers>
+        <div className="px-6 ">
+          <Providers authenticated={isAuthenticated}>
+            <HeroHeader logout={logout} />
+            <main className="pt-10">
+            {children}
+            </main>
+            <Toaster />
+            <FooterSection/>
+          </Providers>
+        </div>
       </body>
     </html>
   );
