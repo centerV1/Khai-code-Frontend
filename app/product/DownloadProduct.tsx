@@ -9,19 +9,24 @@ import { getDownloadUrl } from "../common/service/product/DownloadProduct";
 export default function PurchaseItem({ item }: { item: any }) {
   const [loading, setLoading] = useState(false);
 
-  const handleDownload = async (e: React.MouseEvent) => {
-    e.preventDefault(); // กันไม่ให้ Link ทำงานถ้าคุณยังอยากครอบด้วย Link
+const handleDownload = async (e: React.MouseEvent) => {
+    e.preventDefault();
     setLoading(true);
     try {
       const data = await getDownloadUrl(item.productId);
       
-      // สร้าง anchor tag จำลองเพื่อสั่ง download
-      const link = document.createElement('a');
-      link.href = data.url;
-      link.setAttribute('download', ''); // พยายามสั่ง download (ขึ้นอยู่กับ Header ของ S3 ด้วย)
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+      if (data?.url) {
+        const link = document.createElement('a');
+        link.href = data.url;
+        
+        link.setAttribute('download', ''); 
+        link.target = '_self'; 
+        
+        document.body.appendChild(link);
+        link.click();
+        
+        document.body.removeChild(link);
+      }
     } catch (error) {
       alert("เกิดข้อผิดพลาดในการดาวน์โหลด");
       console.error(error);
@@ -34,7 +39,7 @@ export default function PurchaseItem({ item }: { item: any }) {
     <Card className="overflow-hidden transition-all hover:border-primary/50 hover:shadow-md">
       <CardContent className="p-0">
         <div className="flex items-center gap-4 p-4">
-          {/* ส่วนของรูปภาพเหมือนเดิม */}
+          
           <div className="relative w-24 h-24 overflow-hidden rounded-lg border bg-zinc-100">
             {item.productImage?.images?.length > 0 ? (
               <img src={item.productImage.images[0].imageUrl} alt="Product" className="object-cover h-full w-full" />
@@ -50,7 +55,7 @@ export default function PurchaseItem({ item }: { item: any }) {
             </p>
           </div>
 
-          {/* ปุ่มดาวน์โหลดเพิ่มเข้ามาทางขวา */}
+          
           <Button 
             onClick={handleDownload} 
             disabled={loading}
