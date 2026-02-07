@@ -7,7 +7,6 @@ import Product from "./Product";
 // import { API_URL } from "../common/constants/api";
 // import revalidateProducts from "./actions/revalidate-products";
 // import getAuthentication from "../auth/actions/get-authentication";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ProductGridProps {
   products: any[];

@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import getProduct from "../../common/service/product/getOneProduct";
-// import Checkout from "@/app/checkout/checkout";
+import Checkout from "@/app/checkout/checkout";
 
 type SingleProductProps = {
   params: Promise<{
@@ -18,19 +18,19 @@ export default async function SingleProduct({ params }: SingleProductProps) {
       <div className="flex justify-center">
         <div className="relative w-full lg:max-w-md aspect-square overflow-hidden rounded-lg border bg-muted">
           {product.images?.length > 0 ? (
-          <Image
-            src={product.images?.[0]?.imageUrl}
-            alt={product.name}
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center bg-zinc-200">
-                <span className="text-[10px] text-zinc-400">No Image</span>
-              </div>
-            )}
+            <Image
+              src={product.images?.[0]?.imageUrl}
+              alt={product.name}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-zinc-200">
+              <span className="text-[10px] text-zinc-400">No Image</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -49,10 +49,7 @@ export default async function SingleProduct({ params }: SingleProductProps) {
             {product.description}
           </p>
         </div>
-
-        {/* <div className="pt-4 border-t">
-          <Checkout productId={product.id} />
-        </div> */}
+        <Checkout productId={product.id} />
       </div>
     </div>
   );
